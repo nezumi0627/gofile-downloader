@@ -1,0 +1,49 @@
+[project]
+name = "gofile-dl"
+version = "0.1.0"
+description = "Gofile file downloader"
+authors = [{ name = "nezumi0627" }]
+dependencies = [
+    "aiofiles>=24.1.0",
+    "aiohttp>=3.11.13",
+    "tqdm>=4.67.1",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["gofile_dl"]
+
+[tool.mypy]
+plugins = ["mypy_types"]
+
+[tool.ruff]
+line-length = 79 # PEP 8推奨の行長
+indent-width = 4 # インデント幅
+lint.fixable = ["ALL"] # 自動修正可能なルール
+lint.unfixable = [] # 修正しないルール（空にすればすべて修正可能）
+lint.select = [
+    "E",   # Pyflakes（エラー）
+    "F",   # Pycodestyle（フォーマット）
+    "C90", # mccabe（循環的複雑度）
+    "N",   # PEP8命名規則
+    "B",   # Bugbear（よりパイソニックなコード）
+    "I",   # isort（インポートの整理）
+    "S",   # flake8-bandit（セキュリティ）
+    "RET", # flake8-return（return文の一貫性）
+    "SIM", # flake8-simplify（コード簡素化）
+    "T20", # flake8-print（print文検出）
+]
+
+lint.ignore = ["E203"] # 特定の警告を無視
