@@ -20,12 +20,17 @@ aiosignal==1.3.2
     # via aiohttp
 attrs==25.1.0
     # via aiohttp
+certifi==2025.1.31
+    # via requests
+charset-normalizer==3.4.1
+    # via requests
 colorama==0.4.6
     # via tqdm
 frozenlist==1.5.0
     # via aiohttp
     # via aiosignal
 idna==3.10
+    # via requests
     # via yarl
 multidict==6.1.0
     # via aiohttp
@@ -33,7 +38,11 @@ multidict==6.1.0
 propcache==0.3.0
     # via aiohttp
     # via yarl
+requests==2.32.3
+    # via gofile-dl
 tqdm==4.67.1
     # via gofile-dl
+urllib3==2.3.0
+    # via requests
 yarl==1.18.3
     # via aiohttp

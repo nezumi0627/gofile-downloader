@@ -1,3 +1,5 @@
+# go_file_downloader.py
+
 import asyncio
 import os
 import re
@@ -102,6 +104,10 @@ class GoFileDownloader:
             )
             output_path.mkdir(parents=True, exist_ok=True)
 
+            # ファイルIDのディレクトリを作成
+            content_id_dir = output_path / content_id
+            content_id_dir.mkdir(parents=True, exist_ok=True)
+
             # APIからコンテンツデータを取得
             content_data = await self._api.fetch_content(content_id, password)
             if isinstance(
@@ -119,7 +125,7 @@ class GoFileDownloader:
 
             download_tasks = [
                 self._downloader.download_file(
-                    file_info["link"], output_path / file_info["name"]
+                    file_info["link"], content_id_dir / file_info["name"]
                 )
                 for file_info in files_to_download
             ]
@@ -129,7 +135,7 @@ class GoFileDownloader:
             for file_info, success in zip(files_to_download, download_results):
                 file_result = {
                     "filename": file_info["name"],
-                    "path": str(output_path / file_info["name"]),
+                    "path": str(content_id_dir / file_info["name"]),
                     "size": file_info.get("size"),
                     "success": success,
                 }

@@ -15,5 +15,6 @@ __all__ = [
     "FileDownloader",
     "GoFileAPI",
     "GoFileDownloader",
+    "GofileAccountManager",
     "CLI",
 ]

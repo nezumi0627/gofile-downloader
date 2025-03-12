@@ -1,5 +1,4 @@
-# go_file_api.py
-
+import hashlib
 import urllib.parse
 from typing import Any, Dict, Optional
 
@@ -50,6 +49,8 @@ class GoFileAPI:
             "sortDirection": self.SORT_DIRECTION,
         }
         if password:
+            # パスワードがSHA-256でない場合、SHA-256に変換
+            password = self._convert_to_sha256(password)
             params["password"] = password
         return (
             f"{self.CONTENT_URL}/{content_id}?{urllib.parse.urlencode(params)}"
@@ -67,3 +68,7 @@ class GoFileAPI:
         if self._token:
             headers["Authorization"] = f"Bearer {self._token}"
         return headers
+
+    def _convert_to_sha256(self, password: str) -> str:
+        """パスワードをSHA-256に変換"""
+        return hashlib.sha256(password.encode()).hexdigest()
